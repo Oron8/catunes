@@ -1,0 +1,4 @@
+com.pepe.musicplayer.test.app-androidTest-0 C:\Users\fonta\Documents\codes\MusicPlayer\app\build\generated\res\resValues\androidTest\debug
+com.pepe.musicplayer.test.app-mergeDebugAndroidTestResources-1 C:\Users\fonta\Documents\codes\MusicPlayer\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.pepe.musicplayer.test.app-mergeDebugAndroidTestResources-2 C:\Users\fonta\Documents\codes\MusicPlayer\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.pepe.musicplayer.test.app-debugAndroidTest-3 C:\Users\fonta\Documents\codes\MusicPlayer\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources

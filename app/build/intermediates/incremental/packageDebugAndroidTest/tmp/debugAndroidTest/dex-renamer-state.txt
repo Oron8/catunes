@@ -1,0 +1,4 @@
+#Thu Jun 18 22:02:53 ART 2026
+base.0=C\:\\Users\\fonta\\Documents\\codes\\MusicPlayer\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+path.0=0/classes.dex
+renamed.0=classes.dex

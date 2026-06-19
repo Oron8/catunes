@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.pepe.musicplayer.app-debug-64:/drawable_catunes.png.flat",
+        "source": "com.pepe.musicplayer.app-main-66:/drawable/catunes.png"
+    },
+    {
+        "merged": "C:\\Users\\fonta\\.gradle\\daemon\\9.0-milestone-1\\com.pepe.musicplayer.app-debug-64:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\fonta\\.gradle\\daemon\\9.0-milestone-1\\com.pepe.musicplayer.app-main-66:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\fonta\\.gradle\\daemon\\9.0-milestone-1\\com.pepe.musicplayer.app-debug-64:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\fonta\\.gradle\\daemon\\9.0-milestone-1\\com.pepe.musicplayer.app-main-66:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\fonta\\.gradle\\daemon\\9.0-milestone-1\\com.pepe.musicplayer.app-debug-64:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\fonta\\.gradle\\daemon\\9.0-milestone-1\\com.pepe.musicplayer.app-main-66:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.pepe.musicplayer.app-debug-64:/font_sixtyfour_regular.ttf.flat",
+        "source": "com.pepe.musicplayer.app-main-66:/font/sixtyfour_regular.ttf"
+    }
+]
