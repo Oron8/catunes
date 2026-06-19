@@ -14,80 +14,62 @@
 
 ---
 
-**CATUNES** es un reproductor de música local de nivel premium para Android diseñado con las directrices de **Material Design 3**, una tipografía estilizada basada en **SixtyFour Font**, transiciones optimizadas y un completo motor de audio impulsado por **Media3/ExoPlayer**.
+**CATUNES** is a local music player for Android designed with **Material Design 3** guidelines and a comprehensive audio engine powered by **Media3/ExoPlayer**.
 
 ---
 
-## ✨ Características Premium (Ya Implementadas)
+## ✨ Features (Already Implemented)
 
-- 📂 **Acceso Seguro por Carpetas (SAF)**: Añade y gestiona múltiples carpetas de música (incluyendo tarjetas SD externas) sin conceder permisos globales invasivos.
-- 🔍 **Buscador Premium con Chips**: Filtra tu biblioteca de forma instantánea por **Todo, Canción, Artista o Álbum**.
-- 🍒 **Letras Sincronizadas (.lrc)**: Soporte completo de desplazamiento dinámico en tiempo real y auto-scroll de letras sincronizadas detectadas al lado de la música.
-- 🔀 **Controles de Shuffle & Repeat**: Modos aleatorio y repetición totalmente integrados y nativos de Media3, disponibles tanto en el reproductor como en el MiniPlayer.
-- 🎛️ **Ecualizador Nativo**: Ajustes finos de audio mediante sliders integrados para personalizar tus frecuencias favoritas.
-- 🔊 **Volumen Estable (Normalización de Audio)**: Normalizador inteligente integrado mediante `LoudnessEnhancer` que previene cambios bruscos de nivel entre pistas.
-- 💫 **MiniPlayer Premium**: Barra inferior flotante con transiciones optimizadas y gestos dinámicos, visible a lo largo de toda la navegación.
-- 🎨 **Ajustes de Personalización**:
-  - Selector de colores de acento dinámicos.
-  - Alternador de pantalla (Modo Oscuro, Claro o Sincronizado con el Sistema).
-  - Multiplicador de escala de fuente global para legibilidad.
-- 🚗 **Conexión Automotriz (Bluetooth Metadata)**: Transmisión nativa de carátulas y metadatos (Título, Artista, Álbum) a vehículos o dispositivos externos vía perfiles AVRCP con controles de reproducción heredados.
-
----
-
-## 🛠️ Stack Tecnológico
-
-- **Lenguaje**: [Kotlin](https://kotlinlang.org/) (Corrutinas, StateFlow)
-- **UI**: [Jetpack Compose](https://developer.android.com/jetpack/compose) con animaciones fluidas (`tween`).
-- **Base de Datos**: [Room Database](https://developer.android.com/training/data-storage/room) para indexado rápido de metadata offline.
-- **Motor de Audio**: [Jetpack Media3](https://developer.android.com/guide/topics/media/media3) (`ExoPlayer` + `MediaSession` + `MediaSessionService`).
-- **Persistencia**: [DataStore Preferences](https://developer.android.com/topic/libraries/architecture/datastore) para configuración del usuario.
-- **Carga de Imágenes**: [Coil](https://github.com/coil-kt/coil) para carátulas de álbum desde el caché interno.
+- 📂 **Folder Access (SAF)**: Add and manage multiple music folders (including external SD cards) without granting full access to your entire internal storage.
+- 🔍 **Search with Chips**: Instantly filter your library by **Song, Artist, or Album**.
+- 🍒 **Synchronized Lyrics (.lrc)**: Full support for real-time dynamic scrolling and auto-scroll of detected synchronized lyrics alongside the music.
+- 🔀 **Shuffle & Repeat Controls**: Fully integrated native Media3 shuffle and repeat modes, available in both the main player and the MiniPlayer.
+- 🎛️ **Native Equalizer**: Fine-tune audio adjustments via built-in sliders to customize your favorite frequencies.
+- 🔊 **Stable Volume (Audio Normalization)**: Smart built-in normalization using `LoudnessEnhancer` to prevent sudden level changes between tracks.
+- 💫 **MiniPlayer**: Floating bottom bar with optimized transitions and dynamic gestures, visible throughout navigation.
+- 🎨 **Personalization Settings**:
+  - Dynamic accent color selector.
+  - Theme toggler (Dark Mode, Light Mode, or System Synced).
+  - Global font scale multiplier for readability.
+- 🚗 **Automotive Connection (Bluetooth Metadata)**: Native transmission of cover art and metadata (Title, Artist, Album) to vehicles or external devices via AVRCP profiles with legacy playback controls.
 
 ---
 
-## 💻 Guía de Compilación e Instalación
+## 🛠️ Stack
 
-### 1. Requisitos previos
-* [Android Studio Koala](https://developer.android.com/studio) o superior.
-* JDK 17 (incluido automáticamente con Android Studio).
-* Un dispositivo con Android 8.0 (API 26) o superior con Depuración USB activa, o un emulador.
+- **Language**: [Kotlin](https://kotlinlang.org/) (Coroutines, StateFlow)
+- **UI**: [Jetpack Compose](https://developer.android.com/jetpack/compose) with smooth animations (`tween`).
+- **Database**: [Room Database](https://developer.android.com/training/data-storage/room) for fast offline metadata indexing.
+- **Audio Engine**: [Jetpack Media3](https://developer.android.com/guide/topics/media/media3) (`ExoPlayer` + `MediaSession` + `MediaSessionService`).
+- **Persistence**: [DataStore Preferences](https://developer.android.com/topic/libraries/architecture/datastore) for user settings.
+- **Image Loading**: [Coil](https://github.com/coil-kt/coil) for album art loading from the internal cache.
 
-### 2. Clonar y Compilar
-Abre una terminal y ejecuta:
+---
+
+## 💻 Compilation & Installation Guide
+
+### 1. Prerequisites
+* [Android Studio Koala](https://developer.android.com/studio) or higher.
+* JDK 17 (automatically bundled with Android Studio).
+* A device running Android 8.0 (API 26) or higher with USB Debugging enabled, or an emulator.
+
+### 2. Clone and Compile
+Open a terminal and run:
 ```bash
-git clone https://github.com/TU_USUARIO/CATUNES.git
-cd CATUNES
+git clone https://github.com/oron8/catunes.git
+cd catunes
 ./gradlew.bat assembleDebug
 ```
-El instalador APK estará en:  
+The installable APK will be located at:  
 `app/build/outputs/apk/debug/app-debug.apk`
 
 ---
 
-## 🚀 Cómo Subir este Proyecto a GitHub
+### LICENSE
 
-Si tienes Git instalado en tu computadora, sigue estos comandos para subir todo el proyecto a tu perfil de GitHub:
+This project is licensed under the **CATUNES Open Source Non-Commercial License (COSNCL) v1.0**.
 
-1. **Crear el repositorio en GitHub**: Ve a [GitHub](https://github.com/) y crea un nuevo repositorio llamado `CATUNES` (déjalo vacío, sin README ni .gitignore).
-2. **Inicializar y subir desde la terminal**:
-```bash
-# Inicializar Git en la carpeta local
-git init
-
-# Agregar los archivos del proyecto (.gitignore ya está configurado)
-git add .
-
-# Crear el primer commit
-git commit -m "Initial commit: CATUNES Music Player Premium Release"
-
-# Cambiar a la rama principal
-git branch -M main
-
-# Conectar con tu repositorio remoto de GitHub
-git remote add origin https://github.com/TU_USUARIO/CATUNES.git
-
-# Subir los archivos
-git push -u origin main
-```
-*(Reemplaza `TU_USUARIO` por tu nombre de usuario real en GitHub).*
+See the [LICENSE](LICENSE) file for more details. In summary:
+* **Non-commercial Use**: You can use, study, modify, fork, and redistribute the software freely as long as it is for non-commercial purposes.
+* **Attribution Required**: You must include clear credits to **Oron_8** in any copy or derivative work.
+* **No Warranty**: The software is provided "as is", without warranty of any kind.
