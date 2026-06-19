@@ -47,9 +47,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.pepe.musicplayer.R
@@ -68,10 +71,10 @@ fun LibraryScreen(
     val isScanning by libraryViewModel.isScanning.collectAsState()
     val playlists by playlistViewModel.playlists.collectAsState(initial = emptyList())
 
-    var searchQuery by remember { mutableStateOf("") }
-    var selectedSongForPlaylist by remember { mutableStateOf<Song?>(null) }
+    val searchQuery by libraryViewModel.searchQuery.collectAsState()
+    val searchFilter by libraryViewModel.searchFilter.collectAsState()
 
-    var searchFilter by remember { mutableStateOf("Todo") }
+    var selectedSongForPlaylist by remember { mutableStateOf<Song?>(null) }
 
     // Filtrado de canciones avanzado
     val filteredSongs = remember(songs, searchQuery, searchFilter) {
@@ -120,12 +123,12 @@ fun LibraryScreen(
         // Barra de búsqueda premium
         OutlinedTextField(
             value = searchQuery,
-            onValueChange = { searchQuery = it },
+            onValueChange = { libraryViewModel.setSearch(it, searchFilter) },
             placeholder = { Text("Buscar en tu música...") },
             leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
             trailingIcon = {
                 if (searchQuery.isNotEmpty()) {
-                    IconButton(onClick = { searchQuery = "" }) {
+                    IconButton(onClick = { libraryViewModel.setSearch("", "Todo") }) {
                         Icon(Icons.Filled.Clear, contentDescription = "Limpiar búsqueda")
                     }
                 }
@@ -153,7 +156,7 @@ fun LibraryScreen(
                     color = chipBgColor,
                     shape = RoundedCornerShape(16.dp),
                     modifier = Modifier
-                        .clickable { searchFilter = filter }
+                        .clickable { libraryViewModel.setSearch(searchQuery, filter) }
                 ) {
                     Text(
                         text = filter,
@@ -212,11 +215,26 @@ fun LibraryScreen(
                             Text(song.title, maxLines = 1, overflow = TextOverflow.Ellipsis)
                         },
                         supportingContent = {
-                            Text(
-                                "${song.artist} • ${song.album}",
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
+                            Row {
+                                Text(
+                                    text = song.artist,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    color = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.clickable {
+                                        libraryViewModel.setSearch(song.artist, "Artista")
+                                    }
+                                )
+                                Text(" • ")
+                                Text(
+                                    text = song.album,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
+                                    modifier = Modifier.clickable {
+                                        libraryViewModel.setSearch(song.album, "Álbum")
+                                    }
+                                )
+                            }
                         },
                         leadingContent = {
                             AlbumArtThumbnail(song.albumArtPath)

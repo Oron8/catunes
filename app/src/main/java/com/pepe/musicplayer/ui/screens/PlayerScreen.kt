@@ -9,6 +9,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -82,8 +84,13 @@ fun parseLrc(lrcContent: String?): List<LyricLine> {
     return lines.sortedBy { it.timeMs }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PlayerScreen(playerViewModel: PlayerViewModel) {
+fun PlayerScreen(
+    playerViewModel: PlayerViewModel,
+    onArtistClick: (String) -> Unit,
+    onAlbumClick: (String) -> Unit
+) {
     val state by playerViewModel.playbackState.collectAsState()
     var showLyrics by remember { mutableStateOf(false) }
 
@@ -225,16 +232,39 @@ fun PlayerScreen(playerViewModel: PlayerViewModel) {
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             maxLines = 1,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            modifier = Modifier.basicMarquee()
         )
         Spacer(Modifier.height(6.dp))
-        Text(
-            state.currentSong?.let { "${it.artist} • ${it.album}" } ?: "",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            maxLines = 1,
-            textAlign = TextAlign.Center
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            state.currentSong?.let { song ->
+                Text(
+                    text = song.artist,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier
+                        .basicMarquee()
+                        .clickable { onArtistClick(song.artist) }
+                )
+                Text(
+                    text = " • ",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = song.album,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .basicMarquee()
+                        .clickable { onAlbumClick(song.album) }
+                )
+            }
+        }
 
         Spacer(Modifier.height(24.dp))
 

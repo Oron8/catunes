@@ -28,6 +28,12 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
     private val _isScanning = MutableStateFlow(false)
     val isScanning: StateFlow<Boolean> = _isScanning.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    private val _searchFilter = MutableStateFlow("Todo")
+    val searchFilter: StateFlow<String> = _searchFilter.asStateFlow()
+
     init {
         viewModelScope.launch {
             db.songDao().getAllSongs().collect { _songs.value = it }
@@ -35,6 +41,11 @@ class LibraryViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             folderRepository.folderUris.collect { _folders.value = it }
         }
+    }
+
+    fun setSearch(query: String, filter: String = "Todo") {
+        _searchQuery.value = query
+        _searchFilter.value = filter
     }
 
     fun addFolderAndScan(uriString: String) {

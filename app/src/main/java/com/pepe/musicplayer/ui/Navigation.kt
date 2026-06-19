@@ -3,6 +3,8 @@ package com.pepe.musicplayer.ui
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,7 +44,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
@@ -122,7 +123,16 @@ fun MusicPlayerNavHost(
                     bottomNavItems.forEach { (screen, icon) ->
                         NavigationBarItem(
                             selected = currentRouteHierarchy?.hierarchy?.any { it.route == screen.route } == true,
-                            onClick = { navController.navigate(screen.route) { launchSingleTop = true } },
+                            onClick = { 
+                                // Al navegar a Biblioteca desde el menú, limpiamos búsqueda si ya estamos ahí
+                                if (screen == Screen.Library && currentRoute == Screen.Library.route) {
+                                    libraryViewModel.setSearch("", "Todo")
+                                }
+                                navController.navigate(screen.route) { 
+                                    launchSingleTop = true 
+                                    restoreState = true
+                                } 
+                            },
                             icon = { Icon(icon, contentDescription = screen.label) },
                             label = { Text(screen.label) }
                         )
@@ -176,7 +186,21 @@ fun MusicPlayerNavHost(
                 SettingsScreen(themeRepository = themeRepository)
             }
             composable(Screen.Player.route) {
-                PlayerScreen(playerViewModel = playerViewModel)
+                PlayerScreen(
+                    playerViewModel = playerViewModel,
+                    onArtistClick = { artist ->
+                        libraryViewModel.setSearch(artist, "Artista")
+                        navController.navigate(Screen.Library.route) {
+                            popUpTo(Screen.Library.route) { inclusive = true }
+                        }
+                    },
+                    onAlbumClick = { album ->
+                        libraryViewModel.setSearch(album, "Álbum")
+                        navController.navigate(Screen.Library.route) {
+                            popUpTo(Screen.Library.route) { inclusive = true }
+                        }
+                    }
+                )
             }
             composable(Screen.Equalizer.route) {
                 EqualizerScreen()
@@ -185,6 +209,7 @@ fun MusicPlayerNavHost(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MiniPlayer(
     playbackState: PlaybackState,
@@ -240,16 +265,16 @@ fun MiniPlayer(
                 Text(
                     text = song.title,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                    modifier = Modifier.basicMarquee()
                 )
                 Text(
                     text = song.artist,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.basicMarquee()
                 )
             }
 
