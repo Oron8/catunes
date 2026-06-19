@@ -1,4 +1,4 @@
-# 🎵 CATUNES — Premium Android Music Player
+# 🎵 CATUNES — Good and easy Android Music Player
 
 <p align="center">
   <img src="app/src/main/res/drawable/catunes.png" alt="CATUNES Logo" width="120" style="border-radius: 20px;"/>
